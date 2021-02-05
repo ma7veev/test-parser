@@ -1,0 +1,8 @@
+id;title;description;price;status;url;date updated
+"3";iPhone Max;;$1000;present;https://example.com/iphone.html;2021-01-13 15:12:10
+18;;Good for your grandma;1110;Present;"http://example.com/lorem.php"
+5; Pixel 2 XL;Очень хорошая камера;600 USD;Sold ouT;https://example.com/pixel.html;2021-01-10
+10;Xiomi Mi 9;Cheap and durable;1,300.00;sold out;;10.11.2020;11:10
+
+18;Lorem XM;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum;1110;available ;"http://example.com/lorem.php?%3Fabs%3Dcom"
+
