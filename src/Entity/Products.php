@@ -52,6 +52,11 @@ class Products
      */
     private $date_parsed;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $product_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +115,11 @@ class Products
         return $this->url;
     }
 
+    public function getProductId():?int
+    {
+        return $this->product_id;
+    }
+
     public function setUrl(?string $url): self
     {
         $this->url = $url;
@@ -137,6 +147,13 @@ class Products
     public function setDateParsed(\DateTimeInterface $date_parsed): self
     {
         $this->date_parsed = $date_parsed;
+
+        return $this;
+    }
+
+    public function setProductId(int $product_id):self
+    {
+        $this->product_id = $product_id;
 
         return $this;
     }
