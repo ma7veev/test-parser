@@ -44,7 +44,7 @@ class ParsingResultRepository extends ServiceEntityRepository
             ->orderBy('p.date_parsed', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getSingleResult()
+            ->getOneOrNullResult()
         ;
     }
 
