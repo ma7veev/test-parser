@@ -72,6 +72,7 @@ class Parse extends Command implements ServiceSubscriberInterface
         $this->setDescription('This command allows you to parse data from internet');
         $this->addArgument('url', InputArgument::REQUIRED, 'File or web-page url');
         $this->addArgument('type', InputArgument::REQUIRED, 'Parser type (html, csv)...');
+        $this->addArgument('limit', InputArgument::OPTIONAL, 'Limited number of records to crawl');
     }
 
     /**
@@ -98,6 +99,9 @@ class Parse extends Command implements ServiceSubscriberInterface
             return Command::FAILURE;
         }
         $parser->setUrl($url);
+        if ($input->getArgument('limit')){
+            $parser->setLimit($input->getArgument('limit'));
+        }
         if ($parser->getContent()) {
             $output->writeln('Begin to save data');
 

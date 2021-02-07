@@ -17,6 +17,7 @@ class CsvParser implements ParserInterface
     private $pointer;
     private $new=0;
     private $upd=0;
+    private $limit=20;
     private $result_service;
 
     public function __construct(EntityManagerInterface $em, ParserResultService $result_service)
@@ -35,6 +36,11 @@ class CsvParser implements ParserInterface
         $this->url = $url;
     }
 
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+    }
+
     /**
      * @return CsvReader
      */
@@ -51,19 +57,29 @@ class CsvParser implements ParserInterface
     public function saveContent()
     {
         $start = 0;
-        $position = $this->pointer +1;
-        yield "Start parsing from position $position";
+        $this->pointer++;
+        yield "Start parsing from position {$this->pointer}";
+        $new_pointer = -1;
         if ($this->content) foreach ($this->content->rows() as $row) {
-            if ($start <= $this->pointer) {
+            /*we should start parsing from last pointer*/
+            if ($start < $this->pointer) {
                 $start ++;
                 continue;
             }
             $start ++;
+            $this->limit --;
+            /*if we reach limit of records, stop parsing*/
+            if ($this->limit==0){
+                break;
+            }
+            /*If we got at least one row parsed, change pointer*/
+            $new_pointer = $start;
             if (!empty($row) && is_array($row) && count($row) > 1 && intval($row[ 0 ]) !== 0 && $row[ 1 ] !== 'title') {
                 yield $this->saveItem($row);
             }
+
         }
-        $this->result_service->saveResult($this->new, $this->upd, $start);
+        $this->result_service->saveResult($this->new, $this->upd, $new_pointer);
         yield "Created new records {$this->new}, updated {$this->upd}";
     }
 

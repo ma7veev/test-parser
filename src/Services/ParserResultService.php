@@ -31,6 +31,6 @@ class ParserResultService
     {
         $res = $this->em->getRepository(ParsingResult::class)->findLastPointer();
 
-        return isset($res['pointer'])? $res[ 'pointer' ] :  0;
+        return isset($res['pointer'])? $res[ 'pointer' ] :  -1;
     }
 }
