@@ -38,7 +38,9 @@ class CsvParser implements ParserInterface
 
     public function setLimit($limit)
     {
-        $this->limit = $limit;
+        if (intval($limit)>0){
+            $this->limit = intval($limit);
+        }
     }
 
     /**
