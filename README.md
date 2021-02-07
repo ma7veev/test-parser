@@ -1,3 +1,7 @@
+Requirements
+* PHP 7.3 +
+* Mysql 8 + 
+
 If you run parse first time, specify database connection in .env.locale file, then run:
 
         composer install
