@@ -1,19 +1,18 @@
-# test-parser
-This is a test assignment for parsing data
+If you run parse first time, specify database connection in .env.locale file, then run:
 
-## Task
-1. Make fork from GitHub repository
-1. Using this new fork do the following:
-    1. Write command that can parse CSV file via site URL that can be found in the same repository - `public/parse me.csv` and save to MySQL DB
-    1. Performance optimizations for possible big files
-    1. Save parsed rows data to table `products`
-    1. Command summary results must be saved to separate DB table - `parsing_result`
-    1. The following rules must be followed
-        * all valid data must be saved
-        * errors handling
-        * already existing data in DB must be refreshed and new - added
-        * this data should be easy to use for following processing
-    1. It is possible to add and modify this fork code contents to your liking if needed for some reason
-1. Write instructions on how to run your command and notes if needed how to configure it so that it was possible to run it locally
-1. Provide address to your GitHub repo fork
-1. Wait for feedback :). Good luck!
+        composer install
+        php bin/console doctrine:migrations:migrate
+
+To start parsing run command:
+
+    
+        php bin/console app:parse http://localhost/public/parse%20me.csv csv 3
+        
+Where:
+
+* http://localhost/public/parse%20me.csv - file url
+* csv - type of parsing data (now supported only csv, but one can create other services implemented ParserInterface)
+* 3 - (optional) is limit of records we want to crawl during one session. Default is 20 for test purposes
+
+After running command, we get displaying parsing results, which also is stored in parsing_result table. If we reach the end of rows, we start from beginning on next session. If product date_updated param is changed, parser tries to update data.
+
